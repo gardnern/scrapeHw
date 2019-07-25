@@ -7,19 +7,18 @@ A web app that lets users view and leave comments on the latest news.
 Flex Mongoose and Cheerio to scrape news from another site.
 
 
-Run npm init. When that's finished, install and save these npm packages:
+            npm packages:
 
-express
+            express
 
-express-handlebars
+            express-handlebars
 
-mongoose
+            mongoose
 
-cheerio
+            cheerio
 
-axios
+            axios
 
-NOTE: If you want to earn complete credit for your work, you must use all five of these packages in your assignment.
 
 In order to deploy your project to Heroku, you must set up an mLab provision. mLab is remote MongoDB database that Heroku supports natively. Follow these steps to get it running:
 
