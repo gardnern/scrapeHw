@@ -55,7 +55,7 @@ app.get("/scrape", function(req, res) {
     var $ = cheerio.load(html.data);
 
     $("a.post-block__title__link").each(function(i, element) {
-      console.log("hello");
+     
       var title = $(this).text();
       var link = $(this).attr("href");
       console.log(title);
