@@ -4,51 +4,248 @@
     <meta charset="UTF-8">
     <title>Scrape Homework</title>
     <style>
-      body { background-color: lightgreen) }
-      #wrapper {
-        width: 960px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 5%;
-      }
-      #articles {
-        display: inline-block;
-        overflow: auto;
-        width: 60%;
-        height: 700px;
-      }
-      #notes {
-        float: right;
-        width: 30%;
-      }
-      textarea, input {
-        display: block;
-        width: 100%;
-        background-color: #FCF5C7;
-      }
-      input {
-        height: 36px;
-        font-size: 24px;
-      }
-      textarea {
-        height: 200px;
-        font-size: 18px;
-      }
+      /* html {
+  position: relative;
+  min-height: 100%;
+} */
+
+/* body {
+  margin-bottom: 80px;
+  background-image: url("../images/paper.png");
+} */
+
+.card a:not([href]):not([tabindex]).scrape-new {
+  color: #2196F3;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  color: white;
+  background-color: #2196f3;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.jumbotron {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  padding: 0;
+  font-family: "Cormorant SC";
+  box-shadow: 10px 5px 20px 2px lightslategrey;
+}
+
+.jumbotron .overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: auto;
+  background: linear-gradient(#333, black);
+  opacity: 0.7;
+}
+
+/* .jumbotron .background-image {
+  height: 100%;
+  background-image: url("../images/newspaper.jpg");
+  background-size: cover;
+} */
+
+.jumbotron .caption {
+  position: absolute;
+  top: 30%;
+  width: 100%;
+  text-align: center;
+}
+
+.jumbotron .caption h1,
+.jumbotron .caption p {
+  color: white;
+}
+
+.jumbotron h1 {
+  font-size: 80px;
+  font-weight: 800;
+}
+
+.jumbotron p {
+  font-size: 30px;
+}
+
+.article-container {
+  padding-bottom: 25px;
+}
+
+.card {
+  border-radius: 0;
+  box-shadow: 3px 3px 20px lightslategrey;
+  margin: 20px 0;
+}
+
+.card .card-header {
+  background-color: #1c0ac0;
+  position: relative;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.card .card-header h3 {
+  color: white;
+}
+
+.card .card-header .btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.card .card-header .btn.delete {
+  right: 160px;
+}
+
+.card .card-body {
+  font-size: 16px;
+}
+
+.card .card-header .article-link {
+  color: white;
+  display: inline-block;
+  width: 80%;
+}
+
+.footer > .container > p {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  margin: 0;
+  font-weight: 800;
+  background: #0c7cd5;
+}
+
+.navbar-nav > li > a.scrape-new,
+.navbar-nav > li > a.clear {
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-weight: 800;
+  color: white;
+}
+
+.navbar-nav > li > a.scrape-new:hover,
+.navbar-nav > li > a.clear:hover {
+  background: #6ae26e;
+}
+
+.navbar-nav > li > a.scrape-new:active {
+  background: hsl(261, 79%, 50%);
+}
+
+.scrape-new {
+  cursor: pointer;
+}
+
+.m-top-80 {
+  margin-top: 80px;
+}
+
+textarea {
+  padding: 10px;
+  resize: none;
+  width: 100%;
+}
+
+.bootbox-body .btn {
+  float: right;
+  margin: 5px;
+}
+
+.note.list-group-item .btn {
+  position: relative;
+  bottom: 10px;
+}
+
     </style>
   </head>
   <body>
-    <nav class = "navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class = "navbar-dark" href = "/">Article Scraper Homework</a>
-      <button class = "navbar-toggler" data-toggle="collapse"
-        data-target = ""
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <a class="navbar-brand" href="/">Articles Scraper</a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/">Home
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/saved">Saved Articles</a>
+              </li>
+              <li class="nav-item">
+                <a class="btn btn-danger scrape-new">SCRAPE NEW ARTICLES!</a>
+              </li>
+              <li class="nav-item">
+                <a class="btn btn-danger clear">CLEAR ARTICLES!</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div class="jumbotron text-center">
+            <div class="overlay">
+            </div>
+            <div class="background-image">
+            </div>
+            <div class="caption">
+              <h1>Articles Scraper Homework</h1>
+              <p>Tech Crunch</p>
+            </div>
+          </div>
+          <div class="container-fluid article-container">
+           
+            <div class='alert alert-warning text-center'>
+              <h4>Uh Oh. Looks like we don't have any new articles.</h4>
+            </div>
+            <div class="card">
+              <div class="card-header text-center">
+                <h3>What Would You Like To Do?</h3>
+              </div>
+              <div class="card-body text-center">
+                <h4>
+                  <a class="scrape-new">Try Scraping New Articles</a>
+                </h4>
+                <h4>
+                  <a href="/saved">Go to Saved Articles</a>
+                </h4>
+              </div>
+            </div>
+          </div>
+          
+          <footer class="footer">
+            <div class="container">
+              <p>Tech Crunch Mongo Scraper</p>
+            </div>
+          </footer>
 
-    </nav>
+<!-- 
     <div id="jumbotron">
       <h1>Articles Scraper</h1>
      
       <div id="articles"></div>
       <div id="notes"></div>
-    </div>
+    </div> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app.js"></script>
   </body>
