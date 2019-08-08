@@ -55,25 +55,60 @@ app.get("/scrape", function(req, res) {
     var $ = cheerio.load(html.data);
 
     $("a.post-block__title__link").each(function(i, element) {
-     
-      var title = $(this).text();
-      var link = $(this).attr("href");
-      console.log(title);
-        if (title && link) {
-          db.Article.create({
-            title: title,
-            link: link
-          },
-          function(error, inserted) {
-            if (error) {
-              console.log(error);
-            }
-            else {
-              console.log(inserted);
-            }
-          });
-      }
-    });
+      // Save an empty result object
+      var result = {};
+      var title = $(element).text();
+
+      // In the currently selected element, look at its child elements (i.e., its a-tags),
+      // then save the values for any "href" attributes that the child elements may have
+      var link = $(element).children().attr("href");
+      
+      // Add the text and href of every link, and save them as properties of the result object
+      result.title = $(this)
+        .children("a")
+        .text();
+      result.link = $(this)
+        .children("a")
+        .attr("href");
+
+      // Create a new Article using the `result` object built from scraping
+      db.Article.create(result)
+        .then(function(dbArticle) {
+          // View the added result in the console
+          console.log(dbArticle);
+        })
+        .catch(function(err) {
+          // If an error occurred, log it
+          console.log(err);
+        });
+       
+    
+        // Save these results in an object that we'll push into the results array we defined earlier
+        results.push({
+          title: title,
+          link: link
+        });
+    
+      });
+
+    //   var title = $(this).text();
+    //   var link = $(this).attr("href");
+    //   console.log(title);
+    //     if (title && link) {
+    //       db.Article.create({
+    //         title: title,
+    //         link: link
+    //       },
+    //       function(error, inserted) {
+    //         if (error) {
+    //           console.log(error);
+    //         }
+    //         else {
+    //           console.log(inserted);
+    //         }
+    //       });
+    //   }
+    // });
   
     res.send("Scrape COMPLETE!");
 
